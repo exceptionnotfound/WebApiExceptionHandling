@@ -58,5 +58,13 @@ namespace WebApiExceptionHandling.Controllers
             _service.ThrowItemNotFoundException();
             return Ok();
         }
+
+        [Route("InvalidOperation")]
+        [HttpGet]
+        public IHttpActionResult InvalidOperation()
+        {
+            _service.ThrowInvalidOperationException();
+            return Ok();
+        }
     }
 }

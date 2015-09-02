@@ -18,5 +18,10 @@ namespace WebApiExceptionHandling.Lib.Services
         {
             throw new ArgumentNullException("This is an ArgumentNullException.");
         }
+
+        public void ThrowInvalidOperationException()
+        {
+            throw new InvalidOperationException("This is an InvalidOperationException.");
+        }
     }
 }
