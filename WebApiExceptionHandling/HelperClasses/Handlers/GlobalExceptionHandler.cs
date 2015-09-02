@@ -23,21 +23,21 @@ namespace WebApiExceptionHandling.HelperClasses.Handlers
                     ReasonPhrase = "ArgumentNullException"
                 };
 
-                context.Result = new ArgumentNullResult(context.Request, result);
+                context.Result = new ErrorMessageResult(context.Request, result);
             }
             else
             {
-                // Handle other exceptions, do other things
+                // Handle other exceptions
             }
         }
 
-        public class ArgumentNullResult : IHttpActionResult
+        public class ErrorMessageResult : IHttpActionResult
         {
             private HttpRequestMessage _request;
             private HttpResponseMessage _httpResponseMessage;
 
 
-            public ArgumentNullResult(HttpRequestMessage request, HttpResponseMessage httpResponseMessage)
+            public ErrorMessageResult(HttpRequestMessage request, HttpResponseMessage httpResponseMessage)
             {
                 _request = request;
                 _httpResponseMessage = httpResponseMessage;

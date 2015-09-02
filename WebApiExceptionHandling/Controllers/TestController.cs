@@ -26,11 +26,26 @@ namespace WebApiExceptionHandling.Controllers
             throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotImplemented));
         }
 
+        [Route("CheckId/{id}")]
+        [HttpGet]
+        public IHttpActionResult CheckId(int id)
+        {
+            if (id > 100)
+            {
+                var message = new HttpResponseMessage(HttpStatusCode.BadRequest)
+                {
+                    Content = new StringContent("We cannot use IDs greater than 100.")
+                };
+                throw new HttpResponseException(message);
+            }
+            return Ok(id);
+        }
+
         [Route("BadRequest/{id}")]
         [HttpGet]
         public IHttpActionResult BadRequest(int id)
         {
-            if(id > 100)
+            if (id > 100)
             {
                 var message = new HttpResponseMessage(HttpStatusCode.BadRequest)
                 {
@@ -72,6 +87,28 @@ namespace WebApiExceptionHandling.Controllers
         public HttpResponseMessage HttpError()
         {
             return Request.CreateResponse(HttpStatusCode.Forbidden, "You cannot access this method at this time.");
+        }
+
+        [Route("Forbidden")]
+        [HttpGet]
+        public IHttpActionResult Forbidden()
+        {
+            return Forbidden();
+        }
+
+        [Route("OK")]
+        [HttpGet]
+        public IHttpActionResult OK()
+        {
+            return Ok();
+        }
+
+
+        [Route("NotFound")]
+        [HttpGet]
+        public IHttpActionResult NotFound()
+        {
+            return NotFound();
         }
     }
 }

@@ -10,20 +10,20 @@ using WebApiExceptionHandling.Lib.Exceptions;
 
 namespace WebApiExceptionHandling.HelperClasses.Filters
 {
-    public class ItemNotFoundExceptionFilterAttribute : ExceptionFilterAttribute
+public class ItemNotFoundExceptionFilterAttribute : ExceptionFilterAttribute
+{
+    public override void OnException(HttpActionExecutedContext context)
     {
-        public override void OnException(HttpActionExecutedContext context)
+        if (context.Exception is ItemNotFoundException)
         {
-            if (context.Exception is ItemNotFoundException)
+            var resp = new HttpResponseMessage(HttpStatusCode.NotFound)
             {
-                var resp = new HttpResponseMessage(HttpStatusCode.NotFound)
-                {
-                    Content = new StringContent(context.Exception.Message),
-                    ReasonPhrase = "ItemNotFound"
-                };
-                throw new HttpResponseException(resp);
+                Content = new StringContent(context.Exception.Message),
+                ReasonPhrase = "ItemNotFound"
+            };
+            throw new HttpResponseException(resp);
 
-            }
         }
     }
+}
 }
