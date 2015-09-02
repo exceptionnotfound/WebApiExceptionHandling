@@ -66,5 +66,12 @@ namespace WebApiExceptionHandling.Controllers
             _service.ThrowInvalidOperationException();
             return Ok();
         }
+
+        [Route("HttpError")]
+        [HttpGet]
+        public HttpResponseMessage HttpError()
+        {
+            return Request.CreateResponse(HttpStatusCode.Forbidden, "You cannot access this method at this time.");
+        }
     }
 }
