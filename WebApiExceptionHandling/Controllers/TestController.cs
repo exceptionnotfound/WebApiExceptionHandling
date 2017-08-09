@@ -106,7 +106,7 @@ namespace WebApiExceptionHandling.Controllers
 
         [Route("NotFound")]
         [HttpGet]
-        public IHttpActionResult NotFound()
+        public IHttpActionResult NotFoundAction()
         {
             return NotFound();
         }
